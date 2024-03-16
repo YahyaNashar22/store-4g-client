@@ -5,15 +5,15 @@ import axios from "axios"
 
 export default function Store() {
 
-    const backendURL = process.env.BACK_END || "http://localhost:5000/"
+    const backendURL = process.env.NEXT_PUBLIC_BACKEND || "http://localhost:5000/"
 
     const [fetchedProducts, setFetchedProducts]=useState();
     const [totalNB, setTotalNB] = useState();
     const [page, setPage] = useState(1)
-    const [search, setSearch]= useState();
+    const [search, setSearch]= useState('');
     
         const fetchProducts = () => {
-            if(!search){
+            if(!search || search===''){
                 axios.get(`${backendURL}accessories/get?page=${page}`)
                     .then(res=>{setFetchedProducts(res.data.payload); setTotalNB(res.data.count)})
                     .catch(e=>console.log(e.message))

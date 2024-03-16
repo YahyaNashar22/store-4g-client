@@ -8,7 +8,7 @@ import axios from "axios"
 export default function CardOrderForm() {
 
     const router = useRouter()
-    const backendURL = process.env.BACK_END || 'http://localhost:5000/'
+    const backendURL = process.env.NEXT_PUBLIC_BACKEND || 'http://localhost:5000/'
 
     const [fetchedCards, setFetchedCards] = useState()
     const [name, setName] = useState('');
