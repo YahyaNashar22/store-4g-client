@@ -2,6 +2,7 @@
 
 import {useState,useEffect} from 'react'
 import axios from "axios"
+import OrderForm from './OrderForm'
 
 export default function Store() {
 
@@ -11,6 +12,8 @@ export default function Store() {
     const [totalNB, setTotalNB] = useState();
     const [page, setPage] = useState(1)
     const [search, setSearch]= useState('');
+    const [orderForm, setOrderForm] = useState(false)
+    const [selectedProduct, setSelectedProduct] = useState();
     
         const fetchProducts = () => {
             if(!search || search===''){
@@ -32,6 +35,13 @@ export default function Store() {
         setPage(1)
     },[search])
 
+
+      if (orderForm) {
+        document.body.style.overflow = 'hidden'; // Disable scrolling
+      } else {
+        document.body.style.overflow = ''; // Enable scrolling
+      }
+
   return (
     <main className='flex flex-col flex-wrap gap-5'>
         <input type="text" placeholder="search" value={search} onChange={(e)=>setSearch(e.target.value)} className="appearance-none block w-full px-4 py-2 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
@@ -47,6 +57,8 @@ export default function Store() {
                       <p className="text-gray-700 text-base mb-2"><span className='text-primary font-bold'>Brand:</span> {product.brand}</p>
                       <p className="text-gray-700 text-base mb-2"><span className='text-primary font-bold'>Category:</span> {product.category}</p>
                       <p className="text-gray-700 text-base mb-2"><span className='text-primary font-bold'>Price:</span> {product.price} $</p>
+                      <p className={product.quantity?'border bg-green-400 text-white text-center':'border bg-red-400 text-white text-center'}>{product.quantity?"In Stock":"Out Of Stock"}</p>
+                      <button type='button' className='btn-primary w-max text-center my-3' onClick={()=>{setOrderForm(!orderForm); setSelectedProduct(product)}}>Order Now</button>
                     </div>
                   </div>
                 )
@@ -74,6 +86,9 @@ export default function Store() {
           }
           <p>{page} / {Math.ceil(totalNB/10)}</p>
         </div>
+        {
+          orderForm && <OrderForm setOrderForm={setOrderForm} selectedProduct={selectedProduct} />
+        }
     </main>
   )
 }
