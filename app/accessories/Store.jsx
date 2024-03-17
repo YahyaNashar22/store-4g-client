@@ -57,8 +57,7 @@ export default function Store() {
                       <p className="text-gray-700 text-base mb-2"><span className='text-primary font-bold'>Brand:</span> {product.brand}</p>
                       <p className="text-gray-700 text-base mb-2"><span className='text-primary font-bold'>Category:</span> {product.category}</p>
                       <p className="text-gray-700 text-base mb-2"><span className='text-primary font-bold'>Price:</span> {product.price} $</p>
-                      <p className={product.quantity?'border bg-green-400 text-white text-center':'border bg-red-400 text-white text-center'}>{product.quantity?"In Stock":"Out Of Stock"}</p>
-                      <button type='button' className='btn-primary w-max text-center my-3' onClick={()=>{setOrderForm(!orderForm); setSelectedProduct(product)}}>Order Now</button>
+                      <button type='button' disabled={!product.quantity} className={product.quantity?'btn-primary w-max text-center my-3':'btn bg-red-400 text-white w-max text-center my-3'} onClick={()=>{setOrderForm(!orderForm); setSelectedProduct(product)}}>{product.quantity?"Order Now":"Out Of Stock"}</button>
                     </div>
                   </div>
                 )
