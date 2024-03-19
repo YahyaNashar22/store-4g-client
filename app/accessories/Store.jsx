@@ -64,7 +64,7 @@ export default function Store() {
             })
 
             :
-            <p>No Products To Show</p>
+            <p className='w-full text-center'>Getting your products, please wait. . .</p>
         }
         </section>
         <div className='flex flex-col w-20'>
