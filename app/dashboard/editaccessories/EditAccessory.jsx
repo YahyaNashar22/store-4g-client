@@ -41,7 +41,7 @@ export default function EditAccessory({setEditAccessories}) {
         selectedProduct && Object.keys(selectedProduct).length>0 && (
             <div className="flex flex-col items-center justify-center gap-5" >
                  <img src={`${backendURL}${selectedProduct.picture}`} width={200} height={200} alt={selectedProduct.name} />
-                 <EditAccessoryForm id={selectedProduct._id} setEditAccessories={setEditAccessories} />
+                 <EditAccessoryForm id={selectedProduct._id} setEditAccessories={setEditAccessories} selectedProduct={selectedProduct} />
             </div>
         )
     }

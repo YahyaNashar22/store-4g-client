@@ -43,10 +43,10 @@ export default function Navbar() {
         {
             !isMobile ? 
             <>
-                <Link className={pathname ==='/'?'text-primary text-l':'text-l'} href={'/'}>Home</Link>
-                <Link className={pathname ==='/ushare'?'text-primary text-l':'text-l'} href={'/ushare'}>u-share bundles</Link>
-                <Link className={pathname ==='/cards'?'text-primary text-l':'text-l'} href={'/cards'}>recharge cards</Link>
-                <Link className={pathname ==='/accessories'?'text-primary text-l':'text-l'} href={'/accessories'}>accessories</Link>
+                <Link className={pathname ==='/'?'text-primary text-xl font-semibold':'text-xl font-semibold'} href={'/'}>Home</Link>
+                <Link className={pathname ==='/ushare'?'text-primary text-xl font-semibold':'text-xl font-semibold'} href={'/ushare'}>U-Share Bundles</Link>
+                <Link className={pathname ==='/cards'?'text-primary text-xl font-semibold':'text-xl font-semibold'} href={'/cards'}>Recharge Cards</Link>
+                <Link className={pathname ==='/accessories'?'text-primary text-xl font-semibold':'text-xl font-semibold'} href={'/accessories'}>Accessories</Link>
             </>
             :
             <MobileNavbar />

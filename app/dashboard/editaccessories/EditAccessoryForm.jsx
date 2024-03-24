@@ -3,7 +3,7 @@
 import { useState } from "react"
 import axios from "axios"
 
-export default function EditAccessoryForm({id, setEditAccessories}) {
+export default function EditAccessoryForm({id, setEditAccessories, selectedProduct}) {
 
     const backendURL = process.env.NEXT_PUBLIC_BACKEND || "http://localhost:5000/"
 
@@ -11,10 +11,10 @@ export default function EditAccessoryForm({id, setEditAccessories}) {
 
     const [formData, setFormData] = useState({
         id:id,
-        name:'',    
-        price:'',
-        category:'',
-        brand:'',
+        name:selectedProduct.name,    
+        price:selectedProduct.price,
+        category:selectedProduct.category,
+        brand:selectedProduct.brand,
         quantity:true,
     });
 
