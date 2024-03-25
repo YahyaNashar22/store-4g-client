@@ -35,13 +35,6 @@ export default function Store() {
         setPage(1)
     },[search])
 
-
-      if (orderForm) {
-        document.body.style.overflow = 'hidden'; // Disable scrolling
-      } else {
-        document.body.style.overflow = ''; // Enable scrolling
-      }
-
   return (
     <main className='flex flex-col flex-wrap gap-5'>
         <input type="text" placeholder="search" value={search} onChange={(e)=>setSearch(e.target.value)} className="appearance-none block w-full px-4 py-2 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
