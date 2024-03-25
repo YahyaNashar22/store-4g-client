@@ -33,9 +33,10 @@ export default function page() {
         withCredentials:true
       })
       .then((res) => {
-        setUser(res.data.token.data);
+         setUser(res.data.token.data);
+         localStorage.setItem("user", JSON.stringify(res.data.token.data))
         setLoading(false);
-        router.push('/')
+        router.push('/dashboard')
       })
       .catch((e) => alert("Something wet wrong !"));
       setLoading(false)

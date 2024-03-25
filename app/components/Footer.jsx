@@ -3,20 +3,22 @@
 import Link from "next/link";
 import { userStore } from "../../store";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Footer() {
+
+  const router = useRouter()
 
   const backendURL = process.env.NEXT_PUBLIC_BACKEND || "http://localhost:5000/"
 
   const {user, setUser} = userStore();
+  const [loading, setLoading] = useState(true);
 
-  const getUserData = () =>{
-    axios.get(`${backendURL}users/getone`,{
-      withCredentials:true
-    })
-        .then((res)=>setUser(res.data))
-        .catch(e=>console.log(e.message))
+  const getUser = () => {
+   const retrievedUser =  localStorage.getItem("user")
+   setUser(JSON.parse(retrievedUser));
+   setLoading(false)
   }
 
   const handleLogout = (e) => {
@@ -25,21 +27,24 @@ export default function Footer() {
       withCredentials:true
     })
     .then(()=>{
+      localStorage.clear();
       setUser(null);
+      router.push('/')
     })
     .catch(e=>console.log(e.message))
   }
 
   useEffect(()=>{
-    getUserData()
+    getUser()
   },[])
+
 
   return (
     <footer className="flex flex-col align-middle text-center w-1/2 mx-auto border-t border-gray-300 py-10 ">
         <p>&copy; 4G Store</p>
         <Link className="text-primary text-center w-24 mx-auto" href={'/dashboard'}>Dashboard</Link>
         {
-          user &&
+          user && !loading &&
           <button type="button" className="btn-secondary text-center mx-auto my-5" onClick={handleLogout}>logout</button>
         }
     </footer>
