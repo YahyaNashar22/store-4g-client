@@ -1,6 +1,20 @@
+'use client'
+
 import Link from "next/link";
+import { useLayoutEffect } from "react";
+import { redirect } from 'next/navigation';
+import { userStore } from "../../store";
 
 export default function Dashboard() {
+
+  const {user} = userStore();
+
+  useLayoutEffect(() => {
+    if(!user || user===null){
+      redirect("/login")
+    }
+  }, [user])
+
   return (
     <main>
         <h1>Dashboard</h1>

@@ -23,12 +23,14 @@ export default function Footer() {
 
   const handleLogout = (e) => {
     e.preventDefault();
+    setLoading(true)
     axios.get(`${backendURL}users/logout`,{
       withCredentials:true
     })
     .then(()=>{
       localStorage.clear();
       setUser(null);
+      setLoading(false)
       router.push('/')
     })
     .catch(e=>console.log(e.message))
@@ -45,7 +47,7 @@ export default function Footer() {
         <Link className="text-primary text-center w-24 mx-auto" href={'/dashboard'}>Dashboard</Link>
         {
           user && !loading &&
-          <button type="button" className="btn-secondary text-center mx-auto my-5" onClick={handleLogout}>logout</button>
+          <button type="button" disabled={loading} className="btn-secondary text-center mx-auto my-5" onClick={handleLogout}>{loading?"please wait...":"logout"}</button>
         }
     </footer>
   )

@@ -4,8 +4,20 @@ import { useState } from "react";
 
 import AddAccessoryForm from "./AddAccessoryForm";
 import EditAccessory from "./EditAccessory";
+import { useLayoutEffect } from "react";
+import { redirect } from 'next/navigation';
+import { userStore } from "../../../store";
+
 
 export default function AccessoriesDashboard() {
+
+  const {user} = userStore();
+
+  useLayoutEffect(() => {
+    if(!user || user===null){
+      redirect("/login")
+    }
+  }, [user])
 
   const [createForm, setCreateForm] = useState(false);
   const [editAccessories,  setEditAccessories] = useState(false)

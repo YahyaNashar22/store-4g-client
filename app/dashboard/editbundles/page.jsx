@@ -2,8 +2,20 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useLayoutEffect } from "react";
+import { redirect } from 'next/navigation';
+import { userStore } from "../../../store";
 
 export default function BundlesDashboard() {
+
+  const {user} = userStore();
+
+  useLayoutEffect(() => {
+    if(!user || user===null){
+      redirect("/login")
+    }
+  }, [user])
+
   const backendURL =
     process.env.NEXT_PUBLIC_BACKEND || "http://localhost:5000/";
 

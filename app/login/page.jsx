@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import axios from "axios";
-import { userStore } from "@/store";
-import { useRouter } from "next/navigation";
+import { userStore } from "../../store";
+import { redirect, useRouter } from "next/navigation";
 
 export default function page() {
   const backendURL =
@@ -41,6 +41,12 @@ export default function page() {
       .catch((e) => alert("Something wet wrong !"));
       setLoading(false)
   };
+
+  useLayoutEffect(() => {
+    if(user){
+      redirect("/dashboard")
+    }
+  }, [user])
 
   return ( 
   <form className="w-1/2 h-max flex flex-col flex-wrap items-center justify-between gap-5 mx-auto my-10" onSubmit={handleLogin} >
