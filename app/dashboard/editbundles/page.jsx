@@ -3,18 +3,17 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useLayoutEffect } from "react";
-import { redirect } from 'next/navigation';
+import { redirect } from "next/navigation";
 import { userStore } from "../../../store";
 
 export default function BundlesDashboard() {
-
-  const {user} = userStore();
+  const { user } = userStore();
 
   useLayoutEffect(() => {
-    if(!user || user===null){
-      redirect("/login")
+    if (!user || user === null) {
+      redirect("/login");
     }
-  }, [user])
+  }, [user]);
 
   const backendURL =
     process.env.NEXT_PUBLIC_BACKEND || "http://localhost:5000/";
@@ -51,12 +50,15 @@ export default function BundlesDashboard() {
       .catch((e) => console.log(e));
   };
 
-  const handleCreate = (e) =>{
+  const handleCreate = (e) => {
     e.preventDefault();
-    axios.post(`${backendURL}uShareBundles/create`,{name:name, price:price})
-          .then(()=>{window.location.reload()})
-          .catch(e=>console.log(e.message))
-  }
+    axios
+      .post(`${backendURL}uShareBundles/create`, { name: name, price: price })
+      .then(() => {
+        window.location.reload();
+      })
+      .catch((e) => console.log(e.message));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -116,19 +118,27 @@ export default function BundlesDashboard() {
             );
           })}
       </select>
-      {
-        !addForm && !editForm && <button className="btn-primary w-1/12 text-center" onClick={()=>setAddForm(true)}>Add</button>
-      }
-      {!addForm && !editForm && selectedBundle && selectedBundle !== "Select Bundle" && (
-        <>
+      {!addForm && !editForm && (
         <button
-          className="btn-primary w-1/12 text-center"
-          onClick={() => setEditForm(true)}
+          className="btn-primary w-max text-center"
+          onClick={() => setAddForm(true)}
         >
-          edit
+          Add
         </button>
-        </>
       )}
+      {!addForm &&
+        !editForm &&
+        selectedBundle &&
+        selectedBundle !== "Select Bundle" && (
+          <>
+            <button
+              className="btn-primary w-max text-center"
+              onClick={() => setEditForm(true)}
+            >
+              edit
+            </button>
+          </>
+        )}
       {/* EDIT FORM */}
       {editForm && (
         <>
@@ -152,21 +162,21 @@ export default function BundlesDashboard() {
           </form>
           <button
             type="submit"
-            className="btn-primary w-1/12 text-center self-center"
+            className="btn-primary w-max text-center self-center"
             onClick={handleSubmit}
           >
             Change
           </button>
           <button
             type="button"
-            className="btn-secondary w-1/12 text-center self-center"
+            className="btn-secondary w-max text-center self-center"
             onClick={handleDelete}
           >
             Delete
           </button>
           <button
             type="button"
-            className="btn text-white bg-gray-400 w-1/12 text-center self-center"
+            className="btn text-white bg-gray-400 w-max text-center self-center"
             onClick={() => setEditForm(false)}
           >
             cancel
@@ -196,14 +206,14 @@ export default function BundlesDashboard() {
           </form>
           <button
             type="submit"
-            className="btn-primary w-1/12 text-center self-center"
+            className="btn-primary w-max text-center self-center"
             onClick={handleCreate}
           >
             Add
           </button>
           <button
             type="button"
-            className="btn text-white bg-gray-400 w-1/12 text-center self-center"
+            className="btn text-white bg-gray-400 w-max text-center self-center"
             onClick={() => setAddForm(false)}
           >
             cancel
