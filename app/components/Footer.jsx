@@ -24,22 +24,40 @@ export default function Footer() {
   const handleLogout = async (e) => {
     e.preventDefault();
     setLoading(true);
-    axios
-      .get(`${backendURL}users/logout`, {
+
+    try {
+      axios.get(`${backendURL}users/logout`, {
         withCredentials: true,
-      })
-      .then(() => {
-        localStorage.clear();
-        setUser(null);
-        setLoading(false);
-        router.push("/");
-      })
-      .catch((e) => {
-        alert("Something went wrong, please try again");
-        console.log(e.message);
-        setLoading(false);
       });
+
+      localStorage.clear();
+      setUser(null);
+      setLoading(false);
+      router.push("/");
+    } catch (e) {
+      alert("Something went wrong, please try again");
+      console.log(e.message);
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
   };
+
+  //   axios
+  //     .get(`${backendURL}users/logout`, {
+  //       withCredentials: true,
+  //     })
+  //     .then(() => {
+  //       localStorage.clear();
+  //       setUser(null);
+  //       setLoading(false);
+  //       router.push("/");
+  //     })
+  //     .catch((e) => {
+  //       alert("Something went wrong, please try again");
+  //       console.log(e.message);
+  //       setLoading(false);
+  //     });
 
   useEffect(() => {
     getUser();
@@ -63,6 +81,16 @@ export default function Footer() {
         >
           {loading ? "please wait..." : "logout"}
         </button>
+      )}
+      {loading && (
+        <div className="flex items-center justify-center">
+          <div className="flex flex-col items-center justify-center text-center">
+            <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-red-500"></div>
+            <p className="mt-4 text-2xl font-bold text-red-500 animate-pulse">
+              Logging out...
+            </p>
+          </div>
+        </div>
       )}
     </footer>
   );

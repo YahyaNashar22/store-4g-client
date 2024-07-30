@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import OrderForm from "./OrderForm";
+import Loading from "./loading";
 
 export default function Store() {
   const backendURL =
@@ -104,9 +105,7 @@ export default function Store() {
             );
           })
         ) : (
-          <p className="w-full text-center">
-            Getting your products, please wait. . .
-          </p>
+          <Loading />
         )}
       </section>
       <div className="flex flex-col w-20">
