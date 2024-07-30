@@ -28,7 +28,7 @@ export default function MobileNavbar() {
   return (
     <div>
       {isOpen ? (
-        <div className="flex flex-col gap-10 justify-center align-middle fixed w-full h-full top-0 left-0 text-center bg-black bg-opacity-90 py-10">
+        <div className="flex flex-col gap-10 justify-center align-middle fixed w-full h-full top-0 left-0 text-center bg-black bg-opacity-90 py-10 z-50">
           <Image
             src={x}
             alt="menu button"
@@ -41,6 +41,7 @@ export default function MobileNavbar() {
               pathname === "/" ? "text-primary text-xl" : "text-white text-xl"
             }
             href={"/"}
+            onClick={() => setIsOpen(false)}
           >
             Home
           </Link>
@@ -51,6 +52,7 @@ export default function MobileNavbar() {
                 : "text-white text-xl"
             }
             href={"/ushare"}
+            onClick={() => setIsOpen(false)}
           >
             u-share bundles
           </Link>
@@ -61,6 +63,7 @@ export default function MobileNavbar() {
                 : "text-white text-xl"
             }
             href={"/cards"}
+            onClick={() => setIsOpen(false)}
           >
             recharge cards
           </Link>
@@ -71,6 +74,7 @@ export default function MobileNavbar() {
                 : "text-white text-xl"
             }
             href={"/accessories"}
+            onClick={() => setIsOpen(false)}
           >
             accessories
           </Link>

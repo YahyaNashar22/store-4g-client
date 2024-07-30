@@ -30,7 +30,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="border-b-2 border-gray-200 w-full">
+    <nav className="border-b-2 border-gray-200 w-full z-50">
       <Link href={"/"}>
         <Image
           src={Logo}

@@ -26,8 +26,7 @@ nav {
   @apply pb-4
     flex items-center justify-around gap-5 
     my-10 mx-auto 
-    max-w-5xl
-    z-50 relative;
+    max-w-5xl;
 }
 nav a,
 nav span {
