@@ -60,10 +60,10 @@ export default function Store() {
             return (
               <div
                 key={key}
-                className="max-w-xs min-w-3.5 rounded overflow-hidden shadow-lg"
+                className="max-w-xs min-w-3.5 rounded overflow-hidden shadow-lg z-1"
               >
                 <img
-                  className="transition-transform duration-300 transform hover:scale-105 h-64 w-64"
+                  className="transition-transform duration-300 transform hover:scale-105 sm:h-64 sm:w-64 h-55 w-64"
                   loading="lazy"
                   src={`${backendURL}${product.picture}`}
                   alt={product.name}
@@ -154,6 +154,7 @@ export default function Store() {
         <OrderForm
           setOrderForm={setOrderForm}
           selectedProduct={selectedProduct}
+          orderForm={orderForm}
         />
       )}
     </main>
