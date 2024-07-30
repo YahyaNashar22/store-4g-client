@@ -4,6 +4,7 @@ import { useLayoutEffect, useState } from "react";
 import axios from "axios";
 import { userStore } from "../../store";
 import { redirect, useRouter } from "next/navigation";
+import Loading from "./loading";
 
 export default function page() {
   const backendURL =
@@ -110,6 +111,7 @@ export default function page() {
       >
         {loading ? "please wait" : "Login"}
       </button>
+      {loading && <Loading />}
     </form>
   );
 }
